@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>SLRSYSTM</title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -14,14 +13,25 @@
     <script src="//cdn.muicss.com/mui-0.4.5/js/mui.min.js"></script>
 </head>
 <body onload="init();">
-<img class="logo" src="/img/logo-color.png" width="210px"/>
+<img class="logo" src="/img/logo-color.png" height="75"/>
 <div id="unsupported" class="mui--text-title mui--text-light unsupported" hidden>
     Sorry, your browser is not currently supported. Come back later! Or check it out on another device
 </div>
 <!--[if lt IE 8]>
 <p class="browserupgrade mui--text-title mui--text-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
+<script>
+    function activateModal() {
+        // initialize modal element
+        var modalEl = document.createElement('div');
+        modalEl.setAttribute("id", "modal");
+        // show modal
+        mui.overlay('on', modalEl);
+        $("#modal").load("/views/help.html");
+    }
+</script>
 <canvas id="canvas"></canvas>
-<button id="path-toggle" class="mui-btn mui--hide mui-col-md-2 mui-col-md-offset-10" autofocus></button>
+<button id="path-toggle" class="mui-btn mui--hide" autofocus></button>
+<button id="help" class="mui-btn btn-right" onclick="activateModal()">help</button>
 </body>
 </html>
