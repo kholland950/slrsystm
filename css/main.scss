@@ -6,13 +6,25 @@ $dgrey: #444859; //rgba(68, 72, 89, 100)
 $lgrey: #ccbbb6; //rgba(204, 187, 182, 100)
 $beige: #eed7cd; //rgba(238, 215, 205, 100)
 
-body {
-  background: $bg;
+html body {
+  background-color: $bg;
   margin: 0;
 }
 
 #path-toggle {
   top: 0;
+  float: right;
+  position: fixed;
+}
+
+.logo {
+  top: 0;
   left: 0;
+  padding: 3px;
+  position: fixed;
+}
+
+.unsupported {
+  top: 35%;
   position: fixed;
 }

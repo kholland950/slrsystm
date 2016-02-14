@@ -21,14 +21,13 @@ var bodies = [
 ];
 
 function init() {
-     if (mobileCheck()) {
-         $("#unsupported").show();
-         $("#path-toggle").hide();
-         return;
-     }
-
     var stage = new createjs.Stage("canvas");
     stage.enableMouseOver(60);
+
+    if (mobileCheck()) {
+        $("#unsupported").show();
+        return;
+    }
 
     var rotateSpeed = 1;
 
@@ -37,7 +36,7 @@ function init() {
 
     var pathOn = "turn on orbits";
     var pathOff = "turn off orbits";
-    var pathToggle = $("#path-toggle");
+    var pathToggle = $("#path-toggle").addClass("mui--show");
     pathToggle.text(pathOff).click(function () {
         if (pathToggle.text() == pathOn) {
             pathToggle.text(pathOff);
@@ -49,7 +48,6 @@ function init() {
         }
     });
 
-
     $('html, body').animate({
         scrollTop: (stage.canvas.width/2) - (window.innerHeight/2)
     }, 1500);
@@ -60,7 +58,7 @@ function init() {
     };
 
     background = new createjs.Shape();
-    background.graphics.beginRadialGradientFill(["#171f44","#111432"], [.25,.75],
+    background.graphics.beginRadialGradientFill(["#192148","#111432"], [.25,.75],
         center.x, center.y, 10, center.x, center.y, 1000).drawCircle(center.x, center.y, 1500);
     stage.addChild(background);
 
