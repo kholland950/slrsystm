@@ -10,3 +10,9 @@ body {
   background: $bg;
   margin: 0;
 }
+
+#path-toggle {
+  top: 0;
+  left: 0;
+  position: fixed;
+}
