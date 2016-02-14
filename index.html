@@ -14,11 +14,14 @@
     <script src="//cdn.muicss.com/mui-0.4.5/js/mui.min.js"></script>
 </head>
 <body onload="init();">
-<div id="unsupported"class="mui--text-headline" hidden>Sorry, your browser is not currently supported. Come back later! Or check it out on another device</div>
+<img class="logo" src="/img/logo-color.png" width="210px"/>
+<div id="unsupported" class="mui--text-title mui--text-light unsupported" hidden>
+    Sorry, your browser is not currently supported. Come back later! Or check it out on another device
+</div>
 <!--[if lt IE 8]>
-<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browserupgrade mui--text-title mui--text-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 <canvas id="canvas"></canvas>
-<button id="path-toggle" class="mui-btn" autofocus></button>
+<button id="path-toggle" class="mui-btn mui--hide mui-col-md-2 mui-col-md-offset-10" autofocus></button>
 </body>
 </html>
