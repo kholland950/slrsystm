@@ -5,6 +5,8 @@ var dgrey = "#444859";
 var lgrey = "#CCBBB6";
 var beige = "#EED7CD";
 
+var KEYCODE_LEFT = 37, KEYCODE_RIGHT = 39, KEYCODE_SPACE=32, KEYCODE_ESC=27, KEYCODE_H=72;
+
 var bodyDistance = 85;
 
 //orbital times from http://www.sjsu.edu/faculty/watkins/orbital.htm
@@ -31,22 +33,15 @@ function init() {
 
     var rotateSpeed = 1;
 
+    var focused = -1;
+
     stage.canvas.height = window.innerWidth;
     stage.canvas.width = window.innerWidth;
 
     var pathOn = "turn on orbits";
     var pathOff = "turn off orbits";
     var pathToggle = $("#path-toggle").addClass("mui--show");
-    pathToggle.text(pathOff).click(function () {
-        if (pathToggle.text() == pathOn) {
-            pathToggle.text(pathOff);
-            pathsOn();
-        }
-        else {
-            pathToggle.text(pathOn);
-            pathsOff();
-        }
-    });
+    pathToggle.text(pathOff).click(togglePaths);
 
     $('html, body').animate({
         scrollTop: (stage.canvas.width/2) - (window.innerHeight/2)
@@ -99,25 +94,25 @@ function init() {
         path.planet = circle;
 
         circle.addEventListener("mouseover", function(e) {
-            e.target.text.alpha = 1;
-            focus(e.target)
+            unfocus();
+            focus(e.target);
         });
         circle.addEventListener("mouseout", function(e) {
-            e.target.text.alpha = 0;
-            unfocus(e.target)
+            unfocus();
         });
         path.addEventListener("mouseover", function(e) {
-            e.target.planet.text.alpha = 1;
-            focus(e.target)
+            unfocus();
+            focus(e.target);
         });
         path.addEventListener("mouseout", function(e) {
-            e.target.planet.text.alpha = 0;
-            unfocus(e.target)
+            unfocus();
         });
     }
 
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick", onTick);
+
+    this.document.onkeydown = keyPressed;
 
     stage.update();
 
@@ -131,17 +126,66 @@ function init() {
         stage.update();
     }
 
-    function focus(target) {
-        rotateSpeed = .2;
-        for (var i = 0; i < bodies.length; i++) {
-            if (bodies[i].object != target && bodies[i].object != target.planet) bodies[i].object.alpha = .2;
+    function keyPressed(event) {
+        switch (event.keyCode) {
+            case KEYCODE_LEFT:
+                focused += 1;
+                changeFocus();
+                break;
+            case KEYCODE_RIGHT:
+                focused -= 1;
+                changeFocus();
+                break;
+            case KEYCODE_SPACE:
+                togglePaths();
+                return false;
+            case KEYCODE_ESC:
+                focused = -1;
+                unfocus();
+                break;
+            case KEYCODE_H:
+                if (!helpIsUp())  popupHelp();
+                else closeHelp();
+                break;
         }
     }
 
-    function unfocus(target) {
+    function changeFocus() {
+        if (focused < 0) focused = bodies.length -1;
+        else if (focused > bodies.length - 1) focused = 0;
+        unfocus();
+        focus(bodies[focused].object);
+    }
+
+    function focus(target) {
+        rotateSpeed = .2;
+        for (var i = 0; i < bodies.length; i++) {
+            var body = bodies[i];
+            if (body.object != target && body.object != target.planet) {
+                body.object.alpha = .2;
+            }
+            else {
+                body.object.text.alpha = 1;
+            }
+        }
+    }
+
+    function unfocus() {
         rotateSpeed = 1;
         for (var i = 0; i < bodies.length; i++) {
             bodies[i].object.alpha = 1;
+            bodies[i].object.text.alpha = 0;
+        }
+    }
+
+    function togglePaths() {
+        if (pathToggle.text() == pathOn) {
+            pathToggle.text(pathOff);
+            pathsOn();
+        }
+        else {
+            pathToggle.text(pathOn);
+            pathsOff();
         }
     }
 
@@ -156,6 +200,23 @@ function init() {
             bodies[i].path.alpha = 0;
         }
     }
+}
+
+function popupHelp() {
+    // initialize modal element
+    var modalEl = document.createElement('div');
+    modalEl.setAttribute("id", "modal");
+    // show modal
+    mui.overlay('on', modalEl);
+    $("#modal").load("/views/help.html");
+}
+
+function closeHelp() {
+    $("#mui-overlay").remove();
+}
+
+function helpIsUp() {
+    return $("#mui-overlay").length > 0;
 }
 
 function toRadians (angle) {

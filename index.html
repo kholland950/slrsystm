@@ -20,18 +20,8 @@
 <!--[if lt IE 8]>
 <p class="browserupgrade mui--text-title mui--text-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
-<script>
-    function activateModal() {
-        // initialize modal element
-        var modalEl = document.createElement('div');
-        modalEl.setAttribute("id", "modal");
-        // show modal
-        mui.overlay('on', modalEl);
-        $("#modal").load("/views/help.html");
-    }
-</script>
 <canvas id="canvas"></canvas>
 <button id="path-toggle" class="mui-btn mui--hide" autofocus></button>
-<button id="help" class="mui-btn btn-right" onclick="activateModal()">help</button>
+<button id="help" class="mui-btn btn-right" onclick="popupHelp()">help</button>
 </body>
 </html>
