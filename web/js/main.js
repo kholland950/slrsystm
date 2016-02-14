@@ -29,6 +29,21 @@ function init() {
     stage.canvas.height = window.innerWidth;
     stage.canvas.width = window.innerWidth;
 
+    var pathOn = "turn on orbits";
+    var pathOff = "turn off orbits";
+    var pathToggle = $("#path-toggle");
+    pathToggle.text(pathOff).click(function () {
+        if (pathToggle.text() == pathOn) {
+            pathToggle.text(pathOff);
+            pathsOn();
+        }
+        else {
+            pathToggle.text(pathOn);
+            pathsOff();
+        }
+    });
+
+
     $('html, body').animate({
         scrollTop: (stage.canvas.width/2) - (window.innerHeight/2)
     }, 1500);
@@ -44,8 +59,12 @@ function init() {
     stage.addChild(background);
 
     for (var i = 0; i < bodies.length; i++) {
+        var body = bodies[i];
+
+        if (i > 0) body.alt += "\nyear length: " + body.orbitalTime + " earth years";
+
         var distance = bodyDistance * i;
-        if (i > 0) distance += bodies[i].size;
+        if (i > 0) distance += body.size;
         var path;
         path = new createjs.Shape();
         path.graphics.setStrokeStyle(1);
@@ -54,8 +73,8 @@ function init() {
         path.x = center.x;
         path.y = center.y;
         if (i == 0) path.alpha = 0;
+        body.path = path;
 
-        var body = bodies[i];
         var circle = new createjs.Shape();
         circle.graphics.beginFill(body.color).drawCircle(0, 0, body.size);
         circle.x = center.x;
@@ -114,10 +133,23 @@ function init() {
             if (bodies[i].object != target && bodies[i].object != target.planet) bodies[i].object.alpha = .2;
         }
     }
+
     function unfocus(target) {
         rotateSpeed = 1;
         for (var i = 0; i < bodies.length; i++) {
             bodies[i].object.alpha = 1;
+        }
+    }
+
+    function pathsOn() {
+        for (var i = 0; i < bodies.length; i++) {
+            bodies[i].path.alpha = 1;
+        }
+    }
+
+    function pathsOff() {
+        for (var i = 0; i < bodies.length; i++) {
+            bodies[i].path.alpha = 0;
         }
     }
 }
