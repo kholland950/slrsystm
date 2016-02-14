@@ -24,6 +24,8 @@ function init() {
     var stage = new createjs.Stage("canvas");
     stage.enableMouseOver(60);
 
+    var rotateSpeed = 1;
+
     stage.canvas.height = window.innerWidth;
     stage.canvas.width = window.innerWidth;
 
@@ -99,18 +101,21 @@ function init() {
     function onTick() {
         for (var i = 0; i < bodies.length; i++) {
             var object = bodies[i].object;
-            object.text.rotation += 1 / bodies[i].orbitalTime;
-            object.rotation += 1 / bodies[i].orbitalTime;
+            var degrees = 1 / bodies[i].orbitalTime * rotateSpeed;
+            object.text.rotation += degrees;
+            object.rotation += degrees;
         }
         stage.update();
     }
 
     function focus(target) {
+        rotateSpeed = .2;
         for (var i = 0; i < bodies.length; i++) {
             if (bodies[i].object != target && bodies[i].object != target.planet) bodies[i].object.alpha = .2;
         }
     }
     function unfocus(target) {
+        rotateSpeed = 1;
         for (var i = 0; i < bodies.length; i++) {
             bodies[i].object.alpha = 1;
         }
