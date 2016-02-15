@@ -1,12 +1,22 @@
 /* Coolors Exported Palette - http://coolors.co/app/cc294f-171a38-444859-ccbbb6-eed7cd */
 html body {
   background-color: #111432;
-  margin: 0; }
+  margin: 0;
+  overflow: scroll; }
+
+#menu {
+  position: fixed;
+  top: 0; }
 
 #path-toggle {
+  position: fixed;
   top: 0;
-  float: right;
-  position: fixed; }
+  right: 5px; }
+
+#help {
+  position: fixed;
+  bottom: 5px;
+  right: 5px; }
 
 .logo {
   top: 0;
@@ -17,5 +27,27 @@ html body {
 .unsupported {
   top: 35%;
   position: fixed; }
+
+#modal {
+  width: 400px;
+  height: 300px;
+  margin: 150px auto;
+  background-color: #111432;
+  opacity: .7;
+  border-radius: 5px; }
+
+.text {
+  font-family: "Avenir Next", sans-serif;
+  color: #fff; }
+  .text.content {
+    font-size: 20px; }
+  .text.title {
+    font-size: 32px; }
+
+.content {
+  margin: 5px; }
+
+.help-row {
+  padding: 10px; }
 
 /*# sourceMappingURL=main.css.map */
