@@ -38,9 +38,11 @@ function init() {
     stage.canvas.height = window.innerWidth;
     stage.canvas.width = window.innerWidth;
 
+    $(".btn-hid").addClass("mui--show");
+
     var pathOn = "turn on orbits";
     var pathOff = "turn off orbits";
-    var pathToggle = $("#path-toggle").addClass("mui--show");
+    var pathToggle = $("#path-toggle");
     pathToggle.text(pathOff).click(togglePaths);
 
     $('html, body').animate({
