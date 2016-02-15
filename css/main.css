@@ -26,6 +26,7 @@ html body {
 
 .unsupported {
   top: 35%;
+  left: 20px;
   position: fixed; }
 
 #modal {
