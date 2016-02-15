@@ -9,12 +9,24 @@ $beige: #eed7cd; //rgba(238, 215, 205, 100)
 html body {
   background-color: $bg;
   margin: 0;
+  overflow: scroll;
+}
+
+#menu {
+  position: fixed;
+  top: 0;
 }
 
 #path-toggle {
-  top: 0;
-  float: right;
   position: fixed;
+  top: 0;
+  right: 5px;
+}
+
+#help {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
 }
 
 .logo {
@@ -27,4 +39,34 @@ html body {
 .unsupported {
   top: 35%;
   position: fixed;
+}
+
+#modal {
+  width: 400px;
+  height: 300px;
+  margin: 150px auto;
+  background-color: $bg;
+  opacity: .7;
+  border-radius: 5px;
+}
+
+.text {
+  font-family: "Avenir Next", sans-serif;
+  color: #fff;
+
+  &.content {
+    font-size: 20px;
+  }
+
+  &.title {
+    font-size: 32px;
+  }
+}
+
+.content {
+  margin: 5px;
+}
+
+.help-row {
+  padding: 10px;
 }
