@@ -210,7 +210,7 @@ function popupHelp() {
     modalEl.setAttribute("id", "modal");
     // show modal
     mui.overlay('on', modalEl);
-    $("#modal").load("/views/help.html");
+    $("#modal").load("views/help.html");
 }
 
 function closeHelp() {
