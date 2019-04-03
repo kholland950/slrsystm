@@ -1,4 +1,4 @@
 # solarsystemjs
 Solar system visualization using EaselJS
 
-http://slrsystm.space/
+https://slrsystm.github.io/
